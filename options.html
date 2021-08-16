@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="options.css"/>
+    <title>Change Video Speed Settings</title>
+</head>
+<body>
+<div class="all">
+    <div class="main">
+        <section class="title">
+            <h1>Change Video Speed</h1>
+            <h2>Settings</h2>
+        </section>
+        <div class="settings">
+            <section class="min-max-box">
+                <section class="min-max">
+                    <label>Min:</label>
+                    <br/>
+                    <input class="num-input" id="min" type="number"/>
+                </section>
+                <section class="min-max">
+                    <label>Max:</label>
+                    <br/>
+                    <input class="num-input" id="max" type="number"/>
+                </section>
+            </section>
+        </div>
+        <section class="done">
+            <button id="save">Save</button>
+            <button id="reset">Reset</button>
+        </section>
+    </div>
+</div>
+<div class="modal hidden visually-hidden" id="done-modal">
+    <h1 class="modal-title">Settings saved</h1>
+    <p class="modal-text">You may close the tab now</p>
+</div>
+<div class="overlay hidden visually-hidden"></div>
+<h6 class="credit">Created by Omer Avital</h6>
+<script src="options.js"></script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+
+body {
+  box-sizing: border-box;
+  width: 200px;
+  margin: 0;
+  background-color: #333;
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+  align-items: center;
+  text-align: center;
+}
+
+h1 {
+  width: 30px;
+  height: 15px;
+  margin-left: 85px;
+  margin-top: 10px;
+  text-align: center;
+  font-size: inherit;
+  color: #ccc;
+}
+
+button {
+  height: 35px;
+  width: 40%;
+  margin-top: 5px;
+  outline: none;
+  border: 0;
+  border-radius: 20px;
+  font-size: inherit;
+  background-color: inherit;
+  box-shadow: 1px 1px 7px 1px #111;
+  color: #ccc;
+  transition: background 0.2s, box-shadow 0.2s ease;
+}
+
+button:hover {
+  background-color: #3a3a3a;
+  cursor: pointer;
+}
+
+#settings-url {
+  max-width: 15px;
+  max-height: 15px;
+  cursor: default;
+}
+
+#speedInput {
+  width: 150px;
+  height: 7px;
+  margin-top: 20px;
+  appearance: none;
+  background-color: inherit;
+  box-shadow: 1px 1px 7px 1px #111;
+  border-radius: 5px;
+  outline: none;
+  transition: background 0.2s, box-shadow 0.2s ease;
+}
+
+#speedInput::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: none;
+  height: 15px;
+  width: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #007fe8;
+  box-shadow: 0 0 7px 0 #033c6b;
+  transition: background 0.2s, box-shadow 0.2s ease;
+}
+
+#speedInput::-webkit-slider-thumb:hover {
+  background-color: #1798ff;
+  box-shadow: 0 0 7px 0 #0e79d1;
+}
+
+#speedInput::-webkit-slider-thumb:active {
+  cursor: grabbing;
+}
+
+#settings-gear {
+  width: 15px;
+  height: 15px;
+  margin-left: calc(100% - 20px);
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#settings-gear:hover {
+  cursor: pointer;
+}
