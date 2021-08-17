@@ -1,27 +1,36 @@
 "use strict";
 
-const speedInput = document.getElementById("speedInput");
-const numText = document.getElementById("num");
+const speedInput = document.querySelector(".speed-input");
+const gear = document.querySelector(".settings-gear");
+const settingsUrl = document.querySelector(".settings-url");
+const numText = document.querySelector(".num");
 const reset = document.getElementById("reset");
-const gear = document.getElementById("settings-gear");
-const gearUrl = document.getElementById("settings-url");
 
-chrome.storage.sync.get(["speed", "min", "max"], ({ speed, min, max }) => {
-  speedInput.value = speed;
-  numText.textContent = speedInput.value + "x";
-  speedInput.min = min;
-  speedInput.max = max;
-});
+const setLabelText = () => {
+  numText.textContent = `${speedInput.value}x`;
+};
+
+try {
+  chrome.storage.sync.get(["speed", "min", "max"], ({ speed, min, max }) => {
+    speedInput.value = speed;
+    setLabelText();
+    speedInput.min = min;
+    speedInput.max = max;
+  });
+} catch {
+  speedInput.min = 0.5;
+  speedInput.max = 3;
+}
 
 reset.addEventListener("click", () => {
   speedInput.value = 1;
-  numText.textContent = speedInput.value + "x";
+  setLabelText();
   chrome.storage.sync.set({ speed: speedInput.value });
   changeSpeed(speedInput.value);
 });
 
 speedInput.addEventListener("input", () => {
-  numText.textContent = speedInput.value + "x";
+  setLabelText();
 });
 
 speedInput.addEventListener("mouseup", () => {
@@ -31,16 +40,16 @@ speedInput.addEventListener("mouseup", () => {
 
 // Settings icon
 gear.addEventListener("mouseover", () => {
-  gear.src = "assets/gear_filled.svg";
+  gear.src = "../../assets/gear_filled.svg";
 });
 
 gear.addEventListener("mouseout", () => {
-  gear.src = "assets/gear_empty.svg";
+  gear.src = "../../assets/gear_empty.svg";
 });
 
-gearUrl.href = `chrome-extension://${chrome.runtime.id}/options.html`;
+settingsUrl.href = `chrome-extension://${chrome.runtime.id}/options.html`;
 
-function changeSpeed(s) {
+function changeSpeed() {
   chrome.tabs.query({ active: true, currentWindow: true }, (details) => {
     const tab = details[0];
 

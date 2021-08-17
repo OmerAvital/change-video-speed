@@ -1,22 +1,26 @@
 <html lang="en">
-<head title="Change Video Speed">
+<head>
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="popup.css"/>
+    <title>Change Video Speed</title>
 </head>
 <body>
 <input
-        type="range"
-        min="0.1"
-        max="3"
-        value="1"
-        step="0.1"
-        id="speedInput"
+    type="range"
+    min="0.1"
+    max="3"
+    value="1"
+    step="0.1"
+    class="speed-input"
+    id="speed-input"
 />
-<h1 id="num">1x</h1>
+<label for="speed-input" class="num">1x</label>
 <button id="reset">Reset</button>
-<a id="settings-url" target="_blank" title="Settings">
-    <img id="settings-gear" src="../../assets/gear_empty.svg" alt="settings"/>
-</a>
+<div class="settings-container">
+    <a class="settings-url" target="_blank" title="Settings" href="../../src/options/options.html">
+        <img class="settings-gear" src="../../assets/gear_empty.svg" alt="settings"/>
+    </a>
+</div>
 <script src="popup.js"></script>
 </body>
 </html>

@@ -1,92 +1,115 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto");
 
+:root {
+  --text-secondary-color: #ffcd34;
+  --orange: #ffcd34;
+  --orange-bright: #ffda71;
+  --orange-low-opacity: #ffbe0077;
+  --orange-med-opacity: #ffbe00bb;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --primary-color: #fff;
+    --secondary-color: #f8f8f8;
+
+    --text-primary-color: #000;
+
+    --shadow-color: #ccc;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-color: #292929;
+    --secondary-color: #2c2c2c;
+
+    --text-primary-color: #ccc;
+
+    --shadow-color: #1c1c1c;
+  }
+}
+
 body {
   box-sizing: border-box;
   width: 200px;
   margin: 0;
-  background-color: #333;
+  background-color: var(--primary-color);
   font-family: "Roboto", sans-serif;
-  font-size: 15px;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   text-align: center;
 }
 
-h1 {
-  width: 30px;
-  height: 15px;
-  margin-left: 85px;
+label {
   margin-top: 10px;
   text-align: center;
   font-size: inherit;
-  color: #ccc;
+  color: var(--text-primary-color);
 }
 
 button {
   height: 35px;
-  width: 40%;
+  width: 100px;
   margin-top: 5px;
   outline: none;
   border: 0;
-  border-radius: 20px;
+  border-radius: 18px;
   font-size: inherit;
-  background-color: inherit;
-  box-shadow: 1px 1px 7px 1px #111;
-  color: #ccc;
+  background-color: var(--primary-color);
+  box-shadow: 0 1px 3px var(--shadow-color);
+  color: var(--text-primary-color);
   transition: background 0.2s, box-shadow 0.2s ease;
 }
 
 button:hover {
-  background-color: #3a3a3a;
+  background-color: var(--secondary-color);
   cursor: pointer;
 }
 
-#settings-url {
-  max-width: 15px;
-  max-height: 15px;
-  cursor: default;
-}
-
-#speedInput {
+.speed-input {
   width: 150px;
   height: 7px;
   margin-top: 20px;
   appearance: none;
-  background-color: inherit;
-  box-shadow: 1px 1px 7px 1px #111;
+  background-color: var(--primary-color);
+  box-shadow: 0 1px 3px var(--shadow-color);
   border-radius: 5px;
   outline: none;
   transition: background 0.2s, box-shadow 0.2s ease;
 }
 
-#speedInput::-webkit-slider-thumb {
+.speed-input:hover {
+  background-color: var(--secondary-color);
+}
+
+.speed-input::-webkit-slider-thumb {
   -webkit-appearance: none;
   border: none;
   height: 15px;
   width: 15px;
   border-radius: 8px;
   cursor: pointer;
-  background-color: #007fe8;
-  box-shadow: 0 0 7px 0 #033c6b;
+  background-color: var(--orange);
+  box-shadow: 0 0 3px var(--orange-low-opacity);
   transition: background 0.2s, box-shadow 0.2s ease;
 }
 
-#speedInput::-webkit-slider-thumb:hover {
-  background-color: #1798ff;
-  box-shadow: 0 0 7px 0 #0e79d1;
+.speed-input::-webkit-slider-thumb:hover {
+  background-color: var(--orange-bright);
+  box-shadow: 0 0 7px 0 var(--orange-med-opacity);
 }
 
-#speedInput::-webkit-slider-thumb:active {
-  cursor: grabbing;
+.settings-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
 }
 
-#settings-gear {
+.settings-gear {
   width: 15px;
   height: 15px;
-  margin-left: calc(100% - 20px);
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-
-#settings-gear:hover {
   cursor: pointer;
 }
