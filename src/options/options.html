@@ -8,38 +8,38 @@
     <title>Change Video Speed Settings</title>
 </head>
 <body>
-<div class="all">
     <div class="main">
-        <section class="title">
+        <div class="title">
             <h1>Change Video Speed</h1>
             <h2>Settings</h2>
-        </section>
-        <div class="settings">
-            <section class="min-max-box">
-                <section class="min-max">
-                    <label>Min:</label>
-                    <br/>
-                    <input class="num-input" id="min" type="number"/>
-                </section>
-                <section class="min-max">
-                    <label>Max:</label>
-                    <br/>
-                    <input class="num-input" id="max" type="number"/>
-                </section>
-            </section>
         </div>
-        <section class="done">
+        <div class="settings">
+            <div class="container">
+                <div class="min-max">
+                    <label for="min">Min:</label>
+                    <input class="num-input" id="min" type="number"/>
+                </div>
+                <div class="min-max">
+                    <label for="max">Max:</label>
+                    <input class="num-input" id="max" type="number"/>
+                </div>
+            </div>
+        </div>
+        <div class="container">
             <button id="save">Save</button>
             <button id="reset">Reset</button>
-        </section>
+        </div>
     </div>
+    <h6 class="credit">Created by Omer Avital</h6>
+<div class="modal-container hidden visually-hidden" id="modal-container">
+    <div class="modal-content-container">
+        <div class="modal" id="done-modal">
+            <h1>Settings saved</h1>
+            <h2>You may close the tab now</h2>
+        </div>
+    </div>
+    <div class="overlay"></div>
 </div>
-<div class="modal hidden visually-hidden" id="done-modal">
-    <h1 class="modal-title">Settings saved</h1>
-    <p class="modal-text">You may close the tab now</p>
-</div>
-<div class="overlay hidden visually-hidden"></div>
-<h6 class="credit">Created by Omer Avital</h6>
 <script src="options.js"></script>
 </body>
 </html>
