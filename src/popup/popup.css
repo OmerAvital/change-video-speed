@@ -10,8 +10,9 @@
 
 @media (prefers-color-scheme: light) {
   :root {
+    --background-color: #f6f6f6;
     --primary-color: #fff;
-    --secondary-color: #f8f8f8;
+    --secondary-color: #fffcf1;
 
     --text-primary-color: #000;
 
@@ -21,8 +22,9 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --primary-color: #333;
-    --secondary-color: #3a3a3a;
+    --background-color: #232628;
+    --primary-color: #292a2d;
+    --secondary-color: #323338;
 
     --text-primary-color: #ccc;
 
@@ -34,17 +36,18 @@ body {
   box-sizing: border-box;
   width: 200px;
   margin: 0;
-  background-color: var(--primary-color);
+  background-color: var(--background-color);
   font-family: "Roboto", sans-serif;
   font-size: 14px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  padding: 5px;
 }
 
-label {
-  margin-top: 10px;
+h1 {
+  margin: 10px 0;
   text-align: center;
   font-size: inherit;
   color: var(--text-primary-color);
@@ -53,7 +56,6 @@ label {
 button {
   height: 35px;
   width: 100px;
-  margin-top: 5px;
   outline: none;
   border: 0;
   border-radius: 18px;

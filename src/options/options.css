@@ -6,9 +6,9 @@
 
 @media (prefers-color-scheme: light) {
   :root {
+    --background-color: #f6f6f6;
     --primary-color: #fff;
-    --secondary-color: #fff;
-    --orange: #efefef;
+    --secondary-color: #fff5ca;
 
     --text-primary-color: #000;
 
@@ -18,9 +18,9 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --primary-color: #222;
-    --secondary-color: #292929;
-    --orange: #333;
+    --background-color: #232628;
+    --primary-color: #292a2d;
+    --secondary-color: #323338;
 
     --text-primary-color: #ccc;
 
@@ -40,7 +40,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  background: var(--primary-color);
+  background: var(--background-color);
 }
 
 h1 {
@@ -71,15 +71,18 @@ h6 {
   height: fit-content;
   margin-top: 5vh;
   margin-bottom: 5vh;
-  background-color: var(--secondary-color);
-  border-radius: 20px;
+  background-color: var(--primary-color);
+  border-radius: 15px;
   box-shadow: 0 2px 5px 0 var(--shadow-color);
   padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 
 .title {
   padding-bottom: 15px;
-  border-bottom: 1px var(--orange) solid;
+  border-bottom: 1px var(--secondary-color) solid;
 }
 
 label {
@@ -94,7 +97,7 @@ button {
   outline: none;
   border: 0;
   border-radius: 20px;
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   box-shadow: 0 2px 5px 0 var(--shadow-color);
   color: var(--text-primary-color);
   font-size: 15px;
@@ -103,12 +106,8 @@ button {
 }
 
 button:hover {
-  background-color: var(--orange);
+  background-color: var(--secondary-color);
   cursor: pointer;
-}
-
-.settings {
-  margin: 30px;
 }
 
 .min-max {
@@ -120,8 +119,14 @@ button:hover {
 .container {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
-  padding-top: 15px;
+  justify-content: space-around;
+  margin: 20px 0;
+  width: 80%;
+  align-self: center;
+}
+
+.save-buttons {
+  margin-bottom: 0;
 }
 
 .num-input {
@@ -132,7 +137,7 @@ button:hover {
   margin-top: 7px;
   text-align: center;
   outline: none;
-  background-color: var(--orange);
+  background-color: var(--secondary-color);
   color: var(--text-primary-color);
 }
 

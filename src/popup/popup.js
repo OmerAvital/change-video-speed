@@ -47,7 +47,7 @@ gear.addEventListener("mouseout", () => {
   gear.src = "../../assets/gear_empty.svg";
 });
 
-settingsUrl.href = `chrome-extension://${chrome.runtime.id}/options.html`;
+settingsUrl.href = `chrome-extension://${chrome.runtime.id}/src/options/options.html`;
 
 function changeSpeed() {
   chrome.tabs.query({ active: true, currentWindow: true }, (details) => {
