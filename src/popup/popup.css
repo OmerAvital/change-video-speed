@@ -10,11 +10,11 @@
 
 @media (prefers-color-scheme: light) {
   :root {
-    --background-color: #f6f6f6;
-    --primary-color: #fff;
-    --secondary-color: #fffcf1;
+    --background-color: #f5f5f5;
+    --level-one: #fff;
+    --level-two: #fffcf1;
 
-    --text-primary-color: #000;
+    --text-primary-color: #424242;
 
     --shadow-color: #ccc;
   }
@@ -22,13 +22,13 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background-color: #232628;
-    --primary-color: #292a2d;
-    --secondary-color: #323338;
+    --background-color: #121212;
+    --level-one: #ffffff1f;
+    --level-two: #ffffff2f;
 
     --text-primary-color: #ccc;
 
-    --shadow-color: #1c1c1c;
+    --shadow-color: #00000077;
   }
 }
 
@@ -60,14 +60,14 @@ button {
   border: 0;
   border-radius: 18px;
   font-size: inherit;
-  background-color: var(--primary-color);
+  background-color: var(--level-one);
   box-shadow: 0 1px 3px var(--shadow-color);
   color: var(--text-primary-color);
   transition: background 0.2s, box-shadow 0.2s ease;
 }
 
 button:hover {
-  background-color: var(--secondary-color);
+  background-color: var(--level-two);
   cursor: pointer;
 }
 
@@ -76,7 +76,7 @@ button:hover {
   height: 7px;
   margin-top: 20px;
   appearance: none;
-  background-color: var(--primary-color);
+  background-color: var(--level-one);
   box-shadow: 0 1px 3px var(--shadow-color);
   border-radius: 5px;
   outline: none;
@@ -84,7 +84,7 @@ button:hover {
 }
 
 .speed-input:hover {
-  background-color: var(--secondary-color);
+  background-color: var(--level-two);
 }
 
 .speed-input::-webkit-slider-thumb {

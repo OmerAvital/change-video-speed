@@ -1,5 +1,6 @@
 "use strict";
 
+const page = document.querySelector(".page");
 const minimum = document.getElementById("min");
 const maximum = document.getElementById("max");
 const save = document.getElementById("save");
@@ -61,5 +62,6 @@ function showModel() {
 
   setTimeout(() => {
     modal.classList.remove("visually-hidden");
+    page.classList.add("blur");
   }, 20);
 }
