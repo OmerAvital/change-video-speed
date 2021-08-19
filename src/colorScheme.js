@@ -26,14 +26,9 @@ window
   });
 
 function setColorScheme(scheme) {
-  let colorScheme = scheme;
+  const colorScheme = scheme === "auto" ? preferredColorScheme : scheme;
+  document.documentElement.setAttribute("data-color-scheme", colorScheme);
 
   currentColorScheme = scheme;
   chrome.storage.sync.set({ colorScheme: scheme });
-
-  if (scheme === "auto") {
-    colorScheme = preferredColorScheme;
-  }
-
-  document.documentElement.setAttribute("data-color-scheme", colorScheme);
 }
