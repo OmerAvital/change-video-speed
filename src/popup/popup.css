@@ -1,37 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto");
 
-:root {
-  --text-secondary-color: #ffcd34;
-  --orange: #ffcd34;
-  --orange-bright: #ffda71;
-  --orange-low-opacity: #ffbe0077;
-  --orange-med-opacity: #ffbe00bb;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    --background-color: #f5f5f5;
-    --level-one: #fff;
-    --level-two: #fffcf1;
-
-    --text-primary-color: #424242;
-
-    --shadow-color: #ccc;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background-color: #121212;
-    --level-one: #ffffff1f;
-    --level-two: #ffffff2f;
-
-    --text-primary-color: #ccc;
-
-    --shadow-color: #00000077;
-  }
-}
-
 body {
   box-sizing: border-box;
   width: 200px;
@@ -67,7 +35,7 @@ button {
 }
 
 button:hover {
-  background-color: var(--level-two);
+  background-color: var(--level-three);
   cursor: pointer;
 }
 
@@ -77,14 +45,10 @@ button:hover {
   margin-top: 20px;
   appearance: none;
   background-color: var(--level-one);
-  box-shadow: 0 1px 3px var(--shadow-color);
+  box-shadow: 0 1px 2px var(--shadow-color);
   border-radius: 5px;
   outline: none;
   transition: background 0.2s, box-shadow 0.2s ease;
-}
-
-.speed-input:hover {
-  background-color: var(--level-two);
 }
 
 .speed-input::-webkit-slider-thumb {
@@ -96,12 +60,12 @@ button:hover {
   cursor: pointer;
   background-color: var(--orange);
   box-shadow: 0 0 3px var(--orange-low-opacity);
-  transition: background 0.2s, box-shadow 0.2s ease;
+  transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 .speed-input::-webkit-slider-thumb:hover {
   background-color: var(--orange-bright);
-  box-shadow: 0 0 7px 0 var(--orange-med-opacity);
+  box-shadow: 0 0 5px 0 var(--orange-med-opacity);
 }
 
 .settings-container {

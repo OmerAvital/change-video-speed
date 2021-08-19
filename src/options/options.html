@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="options.css"/>
+    <link rel="stylesheet" href="../colors.css"/>
+    <script src="../colorScheme.js"></script>
     <title>Change Video Speed Settings</title>
 </head>
 <body>
@@ -14,14 +16,31 @@
             <h1>Change Video Speed</h1>
             <h2>Settings</h2>
         </div>
+
         <div class="container">
             <div class="min-max">
                 <label for="min">Min:</label>
-                <input class="num-input" id="min" type="number"/>
+                <input id="min" type="number" max="1"/>
             </div>
             <div class="min-max">
                 <label for="max">Max:</label>
-                <input class="num-input" id="max" type="number"/>
+                <input id="max" type="number" min="1"/>
+            </div>
+        </div>
+
+        <div class="appearance">
+            <label>Appearance</label>
+            <div class="color-scheme-toggle">
+                <input type="radio" name="radioBtn" id="option-auto" class="color-scheme-option" value="auto" />
+                <label for="option-auto">Auto</label>
+
+                <input type="radio" name="radioBtn" id="option-light" class="color-scheme-option" value="light" />
+                <label for="option-light">Light</label>
+
+                <input type="radio" name="radioBtn" id="option-dark" class="color-scheme-option" value="dark" />
+                <label for="option-dark">Dark</label>
+
+                <div class="background"></div>
             </div>
         </div>
         <div class="container save-buttons">
@@ -35,7 +54,7 @@
     <div class="modal-content-container">
         <div class="modal" id="done-modal">
             <h1>Settings saved</h1>
-            <h2>You may close the tab now</h2>
+            <h2>You may close this tab now</h2>
         </div>
     </div>
     <div class="overlay"></div>

@@ -19,7 +19,7 @@ try {
   });
 } catch {
   speedInput.min = 0.5;
-  speedInput.max = 3;
+  speedInput.max = 2;
 }
 
 reset.addEventListener("click", () => {
