@@ -1,12 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap");
 * {
   box-sizing: border-box;
-  font-family: "Roboto", sans-serif;
+  font-family: "Poppins", sans-serif;
   margin: 0;
 }
 
 body {
-  background-color: var(--background-color);
+  background-color: var(--main-color);
 }
 
 .page {
@@ -34,8 +34,7 @@ h2 {
   text-align: center;
   font-size: 23px;
   font-weight: 400;
-  margin: 0;
-  color: var(--text-secondary-color);
+  color: var(--orange);
 }
 
 label {
@@ -45,7 +44,7 @@ label {
 }
 
 h6 {
-  color: var(--text-secondary-color);
+  color: var(--orange);
   font-size: 12px;
   font-weight: 300;
 }
@@ -56,15 +55,15 @@ button {
   outline: none;
   border: 0;
   border-radius: 20px;
-  background-color: var(--level-two);
-  box-shadow: 0 1px 3px 0 var(--shadow-color);
+  background-color: var(--main-color);
+  box-shadow: 2px 3px 25px 0 var(--shadow-color);
   color: var(--text-primary-color);
   font-size: 15px;
   margin: 0 15px;
 }
 
 button:hover {
-  background-color: var(--level-three);
+  background-color: var(--active-color);
   cursor: pointer;
   transition: background-color 0.2s, color 0.2s;
 }
@@ -74,9 +73,9 @@ button:hover {
   max-width: 90%;
   height: fit-content;
   margin-top: 30px;
-  background-color: var(--level-one);
+  background-color: var(--main-color);
   border-radius: 10px;
-  box-shadow: 0 1px 4px 0 var(--shadow-color);
+  box-shadow: 5px 10px 50px 0 var(--shadow-color);
   padding: 25px 30px;
   display: flex;
   flex-direction: column;
@@ -103,19 +102,20 @@ button:hover {
   align-items: center;
 }
 .min-max input {
-  border: 0;
   border-radius: 10px;
   width: 80px;
   height: 30px;
   margin-top: 7px;
   text-align: center;
   outline: none;
-  background-color: var(--level-two);
+  background-color: var(--main-color);
+  box-shadow: 0 3px 18px var(--shadow-color);
+  border: none;
   color: var(--text-primary-color);
   font-size: 12px;
 }
 .min-max input:focus {
-  background-color: var(--level-three);
+  background-color: var(--active-color);
   transition: background-color 0.2s, color 0.2s;
 }
 
@@ -126,13 +126,18 @@ button:hover {
 }
 
 .color-scheme-toggle {
-  background-color: var(--level-two);
+  background-color: var(--main-color);
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin: 10px 0;
-  padding: 3px;
+  box-shadow: inset 0 0 8px var(--shadow-color);
+  overflow: hidden;
+  --padding: 4px;
+}
+.color-scheme-toggle, .color-scheme-toggle .background-container {
   border-radius: 18px;
+  padding: var(--padding);
 }
 .color-scheme-toggle input {
   display: none;
@@ -149,19 +154,26 @@ button:hover {
 .color-scheme-toggle label {
   z-index: 1;
 }
-.color-scheme-toggle .background {
+.color-scheme-toggle .background-container {
   position: absolute;
-  background-color: var(--level-three);
-  box-shadow: 0 1px 2px var(--shadow-color);
+  box-sizing: content-box;
+  transform: translateX(calc(0px - var(--padding)));
+  overflow: hidden;
+  width: 180px;
+  height: 24px;
+  z-index: 0;
+}
+.color-scheme-toggle .background-container .background {
+  background-color: var(--orange-low-opacity);
   transition: transform 0.5s ease;
 }
-.color-scheme-toggle #option-auto:checked ~ .background {
+.color-scheme-toggle #option-auto:checked ~ .background-container .background {
   transform: translateX(0);
 }
-.color-scheme-toggle #option-light:checked ~ .background {
+.color-scheme-toggle #option-light:checked ~ .background-container .background {
   transform: translateX(60px);
 }
-.color-scheme-toggle #option-dark:checked ~ .background {
+.color-scheme-toggle #option-dark:checked ~ .background-container .background {
   transform: translateX(120px);
 }
 
@@ -228,8 +240,8 @@ input::-webkit-inner-spin-button {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-color: var(--level-one);
-  box-shadow: 0 3px 7px var(--shadow-color);
+  background-color: var(--main-color);
+  box-shadow: 0 3px 20px var(--shadow-color);
 }
 
 /*# sourceMappingURL=options.css.map */

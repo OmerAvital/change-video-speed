@@ -1,59 +1,32 @@
 :root {
-    --text-secondary-color: #ffcd34;
-    --orange: #ffcd34;
-    --orange-bright: #ffda71;
-    --orange-low-opacity: #ffbe0077;
-    --orange-med-opacity: #ffbe00bb;
+    --orange: hsl(45, 100%, 60%);
+    --orange-bright: hsl(45, 100%, 72%);
+    --orange-low-opacity: hsla(45, 100%, 50%, 0.5);
+    --orange-med-opacity: hsla(45, 100%, 50%, 0.75);
 }
 
 [data-color-scheme="light"] {
-    --background-color: #f5f5f5;
-    --level-one: #fff;
-    --level-two: #f5f5f5;
-    --level-three: #fff9d3;
-    --accent-color: #ffda71;
+    --main-color: hsl(0, 0%, 100%);
+    --active-color: hsl(52, 100%, 91%);
+    --active-color-values: 52, 100%, 91%;
+    --accent-color: hsl(44, 100%, 72%);
 
-    --text-primary-color: #424242;
+    --orange-highlight: hsla(45, 100%, 50%, 0.73);
 
-    --shadow-color: #00000033;
+    --text-primary-color: hsl(0, 0%, 26%);
+
+    --shadow-color: hsla(0, 0%, 0%, 0.13);
 }
 
 [data-color-scheme="dark"] {
-    --background-color: #212121;
-    --level-one: #303030;
-    --level-two: #404040;
-    --level-three: #545454;
-    --accent-color: #796f57;
+    --main-color: hsl(0, 0%, 22%);
+    --active-color: hsl(0, 0%, 28%);
+    --active-color-values: 0, 0%, 28%;
+    --accent-color: hsl(42, 16%, 41%);
 
-    --text-primary-color: #ccc;
+    --orange-highlight: hsla(45, 100%, 50%, 0.33);
 
-    --shadow-color: #00000077;
-}
+    --text-primary-color: hsl(0, 0%, 80%);
 
-@media (prefers-color-scheme: light) {
-    [data-color-scheme="auto"] {
-        --background-color: #f5f5f5;
-        --level-one: #fff;
-        --level-two: #f5f5f5;
-        --level-three: #fff9d3;
-        --accent-color: #ffda71;
-
-        --text-primary-color: #424242;
-
-        --shadow-color: #00000033;
-    }
-}
-
-@media (prefers-color-scheme: dark) {
-    [data-color-scheme="auto"] {
-        --background-color: #212121;
-        --level-one: #303030;
-        --level-two: #404040;
-        --level-three: #545454;
-        --accent-color: #796f57;
-
-        --text-primary-color: #ccc;
-
-        --shadow-color: #00000077;
-    }
+    --shadow-color: hsla(0, 0%, 0%, 0.35);
 }
