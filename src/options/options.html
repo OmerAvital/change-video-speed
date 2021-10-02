@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="options.css"/>
-    <link rel="stylesheet" href="../colors.css"/>
-    <script src="../colorScheme.js"></script>
+    <link rel="stylesheet" href="../colors/colors.css"/>
+    <script src="../colors/colorScheme.js"></script>
     <title>Change Video Speed Settings</title>
 </head>
 <body>
@@ -19,28 +19,35 @@
 
         <div class="container">
             <div class="min-max">
-                <label for="min">Min:</label>
-                <input id="min" type="number" max="1"/>
+                <label>Min</label>
+                <input type="number" max="1" id="min">
             </div>
             <div class="min-max">
-                <label for="max">Max:</label>
-                <input id="max" type="number" min="1"/>
+                <label>Max</label>
+                <input type="number" min="1" id="max">
             </div>
         </div>
 
-        <div class="appearance container">
+        <div class="container appearance">
             <label>Appearance</label>
             <div class="color-scheme-toggle">
-                <input type="radio" name="radioBtn" id="option-auto" class="color-scheme-option" value="auto" />
+                <input type="radio" name="radioBtn" id="option-auto" class="color-scheme-option" value="auto">
                 <label for="option-auto">Auto</label>
 
-                <input type="radio" name="radioBtn" id="option-light" class="color-scheme-option" value="light" />
+                <input type="radio" name="radioBtn" id="option-light" class="color-scheme-option" value="light">
                 <label for="option-light">Light</label>
 
-                <input type="radio" name="radioBtn" id="option-dark" class="color-scheme-option" value="dark" />
+                <input type="radio" name="radioBtn" id="option-dark" class="color-scheme-option" value="dark">
                 <label for="option-dark">Dark</label>
 
-                <div class="background-container"><div class="background"></div></div>
+                <div class="background"></div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="save-speed">
+                <label>Save Speed:</label>
+                <input type="checkbox" id="save-speed">
             </div>
         </div>
 

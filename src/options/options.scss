@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap");
 
 * {
   box-sizing: border-box;
@@ -7,7 +7,8 @@
 }
 
 body {
-  background-color: var(--main-color);
+  background-color: var(--background-clr);
+  font-size: 100%;
 }
 
 .page {
@@ -26,23 +27,24 @@ body {
 
 h1 {
   text-align: center;
-  font-size: 30px;
+  font-size: 2em;
   font-weight: 500;
   margin: 0;
-  color: var(--text-primary-color);
+  color: hsl(var(--text-primary-color));
 }
 
 h2 {
   text-align: center;
-  font-size: 23px;
+  font-size: 1.5em;
   font-weight: 400;
   color: var(--orange);
 }
 
 label {
   font-weight: 400;
-  font-size: 16px;
-  color: var(--text-primary-color);
+  font-size: 1em;
+  color: hsl(var(--text-primary-color));
+  line-height: 2;
 }
 
 h6 {
@@ -52,33 +54,77 @@ h6 {
 }
 
 button {
-  height: 40px;
-  width: 150px;
+  padding: 0.5em 3.5em;
   outline: none;
   border: 0;
-  border-radius: 20px;
+  border-radius: 100em;
   background-color: var(--main-color);
-  box-shadow: 2px 3px 25px 0 var(--shadow-color);
-  color: var(--text-primary-color);
-  font-size: 15px;
-  margin: 0 15px;
+  box-shadow: var(--shadow-base) var(--shadow-color);
+  color: hsl(var(--text-primary-color));
+  font-size: 1em;
+
+  &:hover {
+    background-color: hsl(var(--active-color-values));
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
 }
 
-button:hover {
-  background-color: var(--active-color);
-  cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
+input[type="number"] {
+  border-radius: 0.75em;
+  padding: 0.6em 0;
+  width: 11ch;
+  text-align: center;
+  outline: none;
+  background-color: var(--main-color);
+  box-shadow: var(--shadow-base) var(--shadow-color);
+  border: none;
+  color: hsl(var(--text-primary-color));
+  font-size: 0.75em;
+
+  &:focus {
+    background-color: hsl(var(--active-color-values));
+  }
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    appearance: none;
+  }
+}
+
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  background-color: transparent;
+  color: hsla(var(--text-primary-color) / 0.8);
+  border: 1px solid currentColor;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 0.25em;
+  position: relative;
+
+  &:hover, &:checked:hover {
+    background-color: hsl(var(--active-color-values));
+  }
+
+  &:checked::after {
+    content: "\2714";
+    position: absolute;
+    font-size: 1em;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
 
 .main {
-  width: 700px;
+  width: 50rem;
   max-width: 90%;
   height: fit-content;
   margin-top: 30px;
   background-color: var(--main-color);
   border-radius: 10px;
-  box-shadow: 5px 10px 50px 0 var(--shadow-color);
-  padding: 25px 30px;
+  box-shadow: var(--shadow-base) var(--shadow-color);
+  padding: 2rem 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -94,68 +140,47 @@ button:hover {
 .container {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  margin: 10px 0;
-  width: 80%;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 1em;
+  margin: 1rem 0;
+  width: 100%;
 }
 
 .min-max {
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  input {
-    border-radius: 10px;
-    width: 80px;
-    height: 30px;
-    margin-top: 7px;
-    text-align: center;
-    outline: none;
-    background-color: var(--main-color);
-    box-shadow: 0 3px 18px var(--shadow-color);
-    border: none;
-    color: var(--text-primary-color);
-    font-size: 12px;
-  }
-
-  input:focus {
-    background-color: var(--active-color);
-    transition: background-color 0.2s, color 0.2s;
-  }
 }
 
 .appearance {
-  display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 0;
 }
 
 .color-scheme-toggle {
+  --padding: 0.25em;
+
   background-color: var(--main-color);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 10px 0;
-  box-shadow: inset 0 0 8px var(--shadow-color);
+  box-shadow: inset var(--shadow-base) 0.5px var(--shadow-color);
   overflow: hidden;
-  --padding: 4px;
+  border-radius: 1em;
+  padding: var(--padding);
 
-  &, .background-container {
-    border-radius: 18px;
-    padding: var(--padding);
-  }
-
-  input {
+  input[type="radio"] {
     display: none;
   }
 
   label, .background {
-    width: 60px;
-    height: 24px;
-    font-size: 12px;
+    width: 5em;
+    height: 2em;
+    font-size: 0.75em;
     text-align: center;
-    border-radius: 13px;
-    line-height: 2;
+    border-radius: 1em;
     cursor: pointer;
   }
 
@@ -163,42 +188,52 @@ button:hover {
     z-index: 1;
   }
 
-  .background-container {
+  .background {
     position: absolute;
-    box-sizing: content-box;
-    transform: translateX(calc(0px - var(--padding)));
-    overflow: hidden;
-    width: 180px;
-    height: 24px;
-    z-index: 0;
+    background-color: var(--orange-low-opacity);
+    transition: transform 0.5s ease;
+  }
+
+  #option-auto:checked ~ .background {
+    transform: translate(0);
+  }
+
+  #option-light:checked ~ .background {
+    transform: translate(100%, 0);
+  }
+
+  #option-dark:checked ~ .background {
+    transform: translate(200%, 0);
+  }
+
+  @media (max-width: 16rem) {
+    flex-direction: column;
+    gap: 0.5em;
 
     .background {
-      background-color: var(--orange-low-opacity);
-      transition: transform 0.5s ease;
+      transform: translate(0);
+    }
+
+    #option-auto:checked ~ .background {
+      transform: translate(0, 0);
+    }
+    #option-light:checked ~ .background {
+      transform: translate(0, calc(1 * (125% + 0.175em)));
+    }
+    #option-dark:checked ~ .background {
+      transform: translate(0, calc(2 * (125% + 0.175em)));
     }
   }
+}
 
-  #option-auto:checked ~ .background-container .background {
-    transform: translateX(0);
-  }
-
-  #option-light:checked ~ .background-container .background {
-    transform: translateX(60px);
-  }
-
-  #option-dark:checked ~ .background-container .background {
-    transform: translateX(120px);
-  }
+.save-speed {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .save-buttons {
   margin-bottom: 0;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
 }
 
 .credit {
