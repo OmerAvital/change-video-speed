@@ -3,16 +3,16 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = env => {
   const { production } = env;
-  console.log(env);
 
   return {
     mode: production ? 'production' : 'development',
     devtool: production ? 'source-map' : 'inline-cheap-source-map',
     stats: {
-      errorDetails: !production,
+      errorDetails: true,
     },
     entry: {
       background: './src/background.ts',
@@ -79,10 +79,10 @@ module.exports = env => {
       ],
     },
     optimization: {
-      // Minify the css files when in production mode.
-      minimize: production,
+      minimize: true,
       minimizer: [
         new CssMinimizerPlugin(),
+        new TerserPlugin(),
       ],
     },
     resolve: {
