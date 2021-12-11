@@ -1,0 +1,34 @@
+:root {
+  --orange: hsl(45, 100%, 60%);
+  --orange-bright: hsl(45, 100%, 72%);
+  --orange-low-opacity: hsla(45, 100%, 50%, 0.5);
+  --orange-med-opacity: hsla(45, 100%, 50%, 0.75);
+
+  --shadow-base: 0 1px 3px;
+}
+
+[data-color-scheme="light"] {
+  --background-clr: hsl(0, 0%, 96%);
+  --main-color: hsl(0, 0%, 100%);
+  --active-color-values: 52, 100%, 91%;
+  --accent-color: hsl(44, 100%, 72%);
+
+  --orange-highlight: hsla(45, 100%, 50%, 0.73);
+
+  --text-primary-color: 0 0% 26%;
+
+  --shadow-color: hsla(0, 0%, 0%, 0.13);
+}
+
+[data-color-scheme="dark"] {
+  --background-clr: hsl(0, 0%, 20%);
+  --main-color: hsl(0, 0%, 24%);
+  --active-color-values: 0, 0%, 28%;
+  --accent-color: hsl(42, 16%, 41%);
+
+  --orange-highlight: hsla(45, 100%, 50%, 0.33);
+
+  --text-primary-color: 0 0% 80%;
+
+  --shadow-color: hsla(0, 0%, 0%, 0.38);
+}

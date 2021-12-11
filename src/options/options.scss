@@ -107,7 +107,7 @@ input[type="checkbox"] {
   }
 
   &:checked::after {
-    content: "\2714";
+    content: "✔";
     position: absolute;
     font-size: 1em;
     top: 0;
@@ -234,11 +234,6 @@ input[type="checkbox"] {
 
 .save-buttons {
   margin-bottom: 0;
-}
-
-.credit {
-  text-align: center;
-  margin: 20px 0;
 }
 
 /* ---------------- */

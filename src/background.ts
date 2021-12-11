@@ -1,5 +1,7 @@
 'use strict';
 
+import { speedChanger } from './utils';
+
 chrome.runtime.onInstalled.addListener(() => {
   chrome.storage.sync.set({
     speed: 1,
@@ -17,26 +19,14 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 
   if (changeInfo.status === 'complete' && tab.active) {
     chrome.webNavigation.getAllFrames({ tabId }, (details) => {
+      if (!details) return;
       // Get array of all frames
       let frameIds = details.map((frameIdObject) => frameIdObject.frameId);
 
       chrome.scripting.executeScript({
         target: { tabId, frameIds },
-        function: speedChanger,
+        func: speedChanger,
       });
     });
   }
 });
-
-function speedChanger() {
-  chrome.storage.sync.get(['speed'], ({ speed }) => {
-    document.querySelectorAll('video').forEach(video => {
-      // Remove event listeners EdPuzzle uses to stop skipping/speeding up video
-      const stopListeners = e => e.stopImmediatePropagation();
-      video.removeEventListener('ratechange', stopListeners, true);
-      video.addEventListener('ratechange', stopListeners, true);
-
-      video.playbackRate = speed;
-    });
-  });
-}

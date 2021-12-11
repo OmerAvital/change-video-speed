@@ -1,9 +1,14 @@
 'use strict';
 
-const speedInput = document.querySelector('.speed-input');
-const settingsUrl = document.querySelector('.settings-url');
-const numText = document.querySelector('.num');
-const reset = document.getElementById('reset');
+import './popup.scss';
+import '../colors/colors.scss';
+import '../colors/colorScheme';
+import { speedChanger } from '../utils';
+
+const speedInput = document.querySelector('.speed-input') as HTMLInputElement;
+const settingsUrl = document.querySelector('.settings-url') as HTMLAnchorElement;
+const numText = document.querySelector('.num') as HTMLHeadingElement;
+const reset = document.getElementById('reset') as HTMLButtonElement;
 
 const setLabelText = () => {
   numText.textContent = `${speedInput.value}x`;
@@ -17,12 +22,12 @@ try {
     speedInput.max = max;
   });
 } catch {
-  speedInput.min = 0.5;
-  speedInput.max = 2;
+  speedInput.min = '0.5';
+  speedInput.max = '2';
 }
 
 reset.addEventListener('click', () => {
-  speedInput.value = 1;
+  speedInput.value = '1';
   setLabelText();
   chrome.storage.sync.set({ speed: speedInput.value });
   changeSpeed();
@@ -37,30 +42,22 @@ speedInput.addEventListener('mouseup', () => {
   changeSpeed();
 });
 
-settingsUrl.href = `chrome-extension://${chrome.runtime.id}/src/options/options.html`;
+settingsUrl.href = `chrome-extension://${chrome.runtime.id}/options.html`;
 
 function changeSpeed() {
   chrome.tabs.query({ active: true, currentWindow: true }, (currTab) => {
-    const tab = currTab[0];
+    const { id } = currTab[0];
+    if (!id) return;
 
-    chrome.webNavigation.getAllFrames({ tabId: tab.id }, (frames) => {
+    chrome.webNavigation.getAllFrames({ tabId: id }, (frames) => {
+      if (!frames) return;
+
       let frameIds = frames.map(({ frameId }) => frameId);
 
       chrome.scripting.executeScript({
-        target: { tabId: tab.id, frameIds: frameIds },
-        function: speedChanger,
+        target: { tabId: id, frameIds: frameIds },
+        func: speedChanger,
       });
-    });
-  });
-}
-
-function speedChanger() {
-  chrome.storage.sync.get(['speed'], ({ speed }) => {
-    document.querySelectorAll('video').forEach(video => {
-      video.addEventListener('ratechange', (e) => {
-        e.stopImmediatePropagation();
-      }, true);
-      video.playbackRate = speed;
     });
   });
 }
