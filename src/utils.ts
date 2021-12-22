@@ -1,12 +1,3 @@
-export function speedChanger() {
-  chrome.storage.sync.get(['speed'], ({ speed }) => {
-    document.querySelectorAll('video').forEach(video => {
-      // Remove event listeners EdPuzzle uses to stop skipping/speeding up video
-      const stopListeners = (e: Event) => e.stopImmediatePropagation();
-      video.removeEventListener('ratechange', stopListeners, true);
-      video.addEventListener('ratechange', stopListeners, true);
-
-      video.playbackRate = speed;
-    });
-  });
+export function toTitleCase(str: string): string {
+  return str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 }

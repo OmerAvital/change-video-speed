@@ -1,0 +1,46 @@
+{
+  "name": "Change Video Speed",
+  "description": "Change the speed of any video.",
+  "version": "2.0.0",
+  "manifest_version": 3,
+  "icons": {
+    "16": "icon/icon-16.png",
+    "32": "icon/icon-32.png",
+    "128": "icon/icon-128.png",
+    "256": "icon/icon-256.png",
+    "512": "icon/icon-512.png"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "run_at" : "document_start",
+      "js": ["before.js"],
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ]
+    },
+    {
+      "run_at" : "document_idle",
+      "js": ["after.js"],
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "background",
+    "webNavigation",
+    "storage"
+  ],
+  "host_permissions": ["<all_urls>"]
+}
