@@ -1,7 +1,6 @@
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const keysTransformer = require('ts-transformer-keys/transformer').default;
 
 module.exports = env => {
   const { production } = env;
@@ -13,11 +12,7 @@ module.exports = env => {
       errorDetails: true,
     },
     entry: {
-      after: './src/chrome/after/after.ts',
-      before: './src/chrome/before/before.ts',
-
       background: './src/chrome/background/background.ts',
-      execute: './src/chrome/execute/execute.ts',
 
       options: './src/react/options/options.tsx',
       popup: './src/react/popup/popup.tsx',

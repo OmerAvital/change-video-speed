@@ -1,5 +1,5 @@
-import React, { Fragment, useReducer, useEffect } from 'react';
-import { Tab, Switch } from '@headlessui/react';
+import React, { useReducer, useEffect } from 'react';
+import { Tab } from '@headlessui/react';
 import NumberInput from '../components/NumberInput';
 import Button from '../components/Button';
 import { updateScheme, schemes, getScheme } from '../colorScheme';
@@ -69,7 +69,7 @@ function OptionsPage(): React.ReactElement {
 
   return (
     <div className="min-h-screen bg-zinc-100 text-zinc-700 font-sans dark:bg-zinc-900 dark:text-zinc-300 select-none">
-      <div className="max-w-3xl mx-auto p-7 space-y-4">
+      <div className="max-w-3xl min-w-fit mx-auto p-7 space-y-4">
         <main>
           <Card>
             <div className="pb-4 mb-6 border-b border-b-yellow-300/50 dark:border-b-yellow-700/50">
