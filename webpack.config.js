@@ -1,9 +1,6 @@
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = env => {
   const { production } = env;
@@ -15,25 +12,35 @@ module.exports = env => {
       errorDetails: true,
     },
     entry: {
-      background: './src/background.ts',
+      background: './src/chrome/background/background.ts',
 
-      options: './src/options/options.ts',
-      popup: './src/popup/popup.ts',
+      options: './src/react/options/options.tsx',
+      popup: './src/react/popup/popup.tsx',
     },
     output: {
       filename: '[name].js',
       path: path.resolve(__dirname, 'dist'),
-      clean: true,
-      assetModuleFilename: 'assets/[name][ext][query]',
     },
     plugins: [
+      // Generate popup HTML file
+      new HtmlWebpackPlugin({
+        template: 'src/react/popup/popup.html',
+        filename: 'popup.html',
+        chunks: ['popup'],
+      }),
+      // Generate options HTML file
+      new HtmlWebpackPlugin({
+        template: 'src/react/options/options.html',
+        filename: 'options.html',
+        chunks: ['options'],
+      }),
       // Copy static files (manifest.json, icons, etc.)
       new CopyWebpackPlugin({
         patterns: [
           {
-            from: './src/manifest.json',
+            from: './src/chrome/manifest.json',
             to: 'manifest.json',
-            transform: (content, path) => {
+            transform: content => {
               const manifest = JSON.parse(content);
               /* transform manifest here */
               return JSON.stringify(manifest, null, 2);
@@ -45,48 +52,32 @@ module.exports = env => {
           },
         ],
       }),
-      // Generate popup HTML file (inserts the js and css files into the HTML)
-      new HtmlWebpackPlugin({
-        template: './src/popup/popup.html',
-        filename: 'popup.html',
-        chunks: ['popup'],
-      }),
-      // Generate options HTML file (inserts the js and css files into the HTML)
-      new HtmlWebpackPlugin({
-        template: './src/options/options.html',
-        filename: 'options.html',
-        chunks: ['options'],
-      }),
-      // Creates and copies the css files. Remove if you want to inject the css into the HTML head.
-      new MiniCssExtractPlugin(),
     ],
     module: {
       rules: [
         {
-          test: /\.s[ac]ss$/i,
-          use: [
-            MiniCssExtractPlugin.loader, // Change this to 'style-loader' to inject CSS into the HTML head.
-            'css-loader',
-            'sass-loader',
-          ],
+          test: /\.tsx?/i,
           exclude: /node_modules/,
+          use: ['babel-loader'],
         },
         {
-          test: /\.tsx?$/,
-          use: 'ts-loader',
-          exclude: /node_modules/,
+          test: /\.css/i,
+          use: [
+            'style-loader',
+            'css-loader',
+            'postcss-loader',
+          ],
         },
       ],
     },
     optimization: {
-      minimize: true,
-      minimizer: [
-        new CssMinimizerPlugin(),
-        new TerserPlugin(),
-      ],
+
     },
     resolve: {
       extensions: ['.tsx', '.ts', '.js'],
+      alias: {
+        components: path.resolve(__dirname, 'src', 'chrome', 'components'),
+      },
     },
   };
 };
