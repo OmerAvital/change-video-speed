@@ -2,20 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c5d6be67-cfcb-4189-9d0e-cb978b22fadf" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/markdown.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/icon/icon-48.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/chrome/background/background.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/chrome/background/background.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/chrome/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/chrome/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/icon/icon-128.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/icon/icon-128.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/icon/icon-16.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/icon/icon-16.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/icon/icon-256.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/icon/icon-32.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/icon/icon-32.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/icon/icon-512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/react/options/OptionsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/react/options/OptionsPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +46,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1640165778559</updated>
-      <workItem from="1640165781086" duration="674000" />
+      <workItem from="1640165781086" duration="1019000" />
     </task>
     <servers />
   </component>

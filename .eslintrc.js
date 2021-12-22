@@ -30,4 +30,5 @@ module.exports = {
     'no-undef': 'off',
     'max-len': 'off',
   },
+  ignorePatterns: ['node_modules/', 'dist/'],
 };
