@@ -2,5 +2,8 @@
   "presets": [
     "@babel/react",
     "@babel/preset-typescript"
+  ],
+  "plugins": [
+    "./babel/cleanup-classNames.js"
   ]
 }

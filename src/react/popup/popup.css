@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    @apply aspect-square h-4 rounded-full bg-yellow-400 cursor-pointer hover:shadow-md hover:bg-yellow-300 transition-all dark:hover:shadow-yellow-300/50;
+  }
+}
