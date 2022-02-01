@@ -1,15 +1,11 @@
-import React from 'react';
+import React, { FC, HTMLAttributes } from 'react';
 
-interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode | React.ReactNode[];
-}
+interface CardProps extends HTMLAttributes<HTMLDivElement> { }
 
-function Card({ children, className }: CardProps): React.ReactElement {
-  return (
-    <div className={`bg-zinc-50 p-7 shadow rounded-lg dark:bg-zinc-800 ${className}`}>
-      {children}
-    </div>
-  );
-}
+const Card: FC<CardProps> = ({ children, className }: CardProps) => (
+  <div className={`p-7 bg-zinc-50 shadow rounded-lg dark:bg-zinc-800 ${className ?? ''}`}>
+    {children}
+  </div>
+);
 
 export default Card;

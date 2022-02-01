@@ -1,13 +1,31 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
+    "target": "es2018",
+    "module": "esnext",
     "moduleResolution": "node",
-    "outDir": "./dist/",
-    "esModuleInterop": true,
     "strict": true,
+    "rootDirs": [
+      "./src",
+    ],
+    "outDir": "./dist/",
+    "baseUrl": ".",
     "noImplicitAny": true,
     "skipLibCheck": true,
     "jsx": "react-jsx",
+    "paths": {
+      "utils": ["./src/utils"],
+      "components": ["./src/react/components"],
+      "hooks": ["./src/react/hooks"],
+      "redux/*": ["./src/react/redux/*"],
+      "chrome/*": ["./src/chrome/*"],
+    },
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs",
+    },
   }
 }

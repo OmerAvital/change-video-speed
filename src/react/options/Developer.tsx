@@ -1,90 +1,108 @@
-import React, { useEffect, useState } from 'react';
+import React, {
+  FC, useEffect, useRef, useState,
+} from 'react';
 import { Switch, Transition } from '@headlessui/react';
-import Card from '../components/Card';
-import useEffectAsync from '../hooks/useEffectAsync';
-import { getStoredOptions, IStoredOptions, setStoredOptions } from '../../storage';
-import useWindowDimensions from '../hooks/useWindowDimentions';
+import { useDispatch, useSelector } from 'react-redux';
+import { getStoredOptions, IStoredOptions } from 'chrome/storage';
+import { Card, CodeBlock, CustomSwitch } from 'components';
+import { useWindowDimensions } from 'hooks';
+import { AppDispatch, RootState } from 'redux/store';
+import { setDeveloperMode } from 'redux/options';
+import { useAsync } from 'react-use';
 
-function Developer(): React.ReactElement {
-  const [options, setOptions] = useState<IStoredOptions>();
-  const [showSwitch, setShowSwitch] = useState(false);
-  const [timeoutId, setTimeoutId] = useState<number>();
+const Developer: FC = () => {
+  const options = useSelector((opts: RootState) => opts.options) as IStoredOptions;
+  const dispatch = useDispatch<AppDispatch>();
+
+  const [savedOptions, setSavedOptions] = useState<IStoredOptions>();
+
+  const [showSwitch, setShowSwitch] = useState(true);
+  const timeoutId = useRef<number>();
+  const isFirstRender = useRef(true);
   const { width } = useWindowDimensions();
 
-  useEffectAsync(async () => {
-    const data = await getStoredOptions();
-    setOptions(data);
+  useAsync(async () => {
+    if (isFirstRender.current) {
+      setTimeout(() => { isFirstRender.current = false; }, 100);
+    }
 
-    chrome.storage.onChanged.addListener(async (changes, namespace) => {
+    setSavedOptions(await getStoredOptions());
+
+    chrome.storage.onChanged.addListener((changes, namespace) => {
       if (namespace !== 'local') return;
-      const d = await getStoredOptions();
-      setOptions(d);
+      const newOpts: Partial<IStoredOptions> = Object.fromEntries(
+        Object.entries(changes).map(([key, { newValue }]) => [key, newValue]),
+      );
+      setSavedOptions(opts => ({ ...opts, ...newOpts } as IStoredOptions));
     });
   }, []);
-
   useEffect(() => {
-    clearTimeout(timeoutId);
-    if (options?.developerMode) {
-      setShowSwitch(!options?.developerMode);
+    clearTimeout(timeoutId.current);
+    if (options.developerMode) {
+      setShowSwitch(false);
       return;
     }
-    setTimeoutId(setTimeout(() => setShowSwitch(!options?.developerMode), 300) as unknown as number);
-  }, [options?.developerMode]);
+    timeoutId.current = setTimeout(() => {
+      setShowSwitch(true);
+    }, 200) as unknown as number;
+  }, [options.developerMode]);
 
   return (
     <>
-      {(showSwitch || width > 1280) && (
-        <Switch.Group as={Card} className="flex items-center gap-3 w-fit py-2 px-3 rounded ml-auto xl:absolute xl:top-0 xl:right-4">
+      {/* Switch */}
+      <Transition
+        enter={isFirstRender.current ? '' : 'transition duration-150'}
+        enterFrom="opacity-0"
+        enterTo="opacity-full"
+        show={showSwitch || width >= 1280}
+        className="w-fit ml-auto  xl:absolute xl:top-0 xl:right-4"
+      >
+        <Switch.Group as={Card} className="flex items-center gap-3 py-2 px-3 rounded">
           <Switch.Label className="whitespace-nowrap">Developer Mode</Switch.Label>
-          <Switch
-            checked={Boolean(options?.developerMode)}
-            onChange={() => setStoredOptions({ developerMode: !options?.developerMode })}
-            className={`w-11 h-6 rounded-full transition-colors duration-200 ${options?.developerMode ? 'bg-yellow-400 dark:bg-yellow-600' : 'bg-zinc-200 dark:bg-zinc-700'}`}
-          >
-            <span className={`block w-5 h-5 m-0.5 rounded-full shadow bg-white dark:bg-zinc-300 transition-transform duration-200 ${options?.developerMode ? 'translate-x-5' : ''}`} />
-          </Switch>
+          <CustomSwitch
+            checked={options.developerMode}
+            onChange={checked => dispatch(setDeveloperMode(checked))}
+          />
         </Switch.Group>
-      )}
+      </Transition>
 
       <Transition
-        enter="transition duration-300"
+        enter={isFirstRender.current ? '' : 'transition duration-300'}
         enterFrom="opacity-0 translate-y-2"
         enterTo="opacity-full translate-y-0"
         leave="transition duration-100"
         leaveFrom="opacity-full translate-y-0"
         leaveTo="opacity-0 translate-y-1"
-        show={Boolean(options?.developerMode)}
+        show={Boolean(options.developerMode)}
       >
-        <Card className="relative">
+        <Card className="relative max-w-4xl mx-auto">
+          {/* Switch */}
           {width < 1280 && (
-          <Switch.Group as={Card} className="absolute flex items-center gap-3 w-fit py-2 px-3 rounded top-4 right-4 shadow-none border dark:border-zinc-700">
-            <Switch.Label className="whitespace-nowrap">Developer Mode</Switch.Label>
-            <Switch
-              checked={options?.developerMode || false}
-              onChange={() => setStoredOptions({ developerMode: !options?.developerMode })}
-              className={`w-11 h-6 rounded-full transition-colors duration-200 ${options?.developerMode ? 'bg-yellow-400 dark:bg-yellow-600' : 'bg-zinc-200 dark:bg-zinc-700'}`}
+            <Switch.Group
+              as={Card}
+              className="absolute top-4 right-4 flex items-center gap-3 w-fit py-2 px-3
+                       rounded shadow-none border dark:border-zinc-700"
             >
-              <span className={`block w-5 h-5 m-0.5 rounded-full shadow bg-white dark:bg-zinc-300 transition-transform duration-200 ${options?.developerMode ? 'translate-x-5' : ''}`} />
-            </Switch>
-          </Switch.Group>
+              <Switch.Label className="whitespace-nowrap">Developer Mode</Switch.Label>
+              <CustomSwitch
+                checked={options.developerMode}
+                onChange={checked => dispatch(setDeveloperMode(checked))}
+              />
+            </Switch.Group>
           )}
 
-          <h2 className="text-xl font-black">Developer</h2>
+          <h2 className="text-xl font-bold">Developer</h2>
 
-          <div className="mt-4">
+          <div className="mt-2">
             <h3 className="text-base">Saved Data</h3>
-            <code
-              className="block p-2 mt-2 rounded bg-zinc-100 border dark:bg-zinc-700 dark:text-zinc-200 dark:border-zinc-600 select-text"
-            >
-              <pre className="mt-1">
-                {JSON.stringify(options, null, 2)}
-              </pre>
-            </code>
+            <CodeBlock>
+              {JSON.stringify(savedOptions, null, 2)}
+            </CodeBlock>
           </div>
         </Card>
       </Transition>
     </>
   );
-}
+};
 
 export default Developer;

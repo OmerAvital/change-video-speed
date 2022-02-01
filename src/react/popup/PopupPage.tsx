@@ -1,74 +1,95 @@
-import React, { useEffect, useState } from 'react';
-import { CogIcon as CogIconOutline } from '@heroicons/react/outline';
+import React, {
+  FC, useEffect, useRef, useState,
+} from 'react';
+import { CogIcon as CogIconOutline, PlusIcon, MinusIcon } from '@heroicons/react/outline';
 import { CogIcon as CogIconSolid } from '@heroicons/react/solid';
-import Button from '../components/Button';
-import { getScheme } from '../colorScheme';
-import {
-  DEFAULT_OPTIONS,
-  DEFAULT_SPEED, getSpeed, getStoredOptions, IStoredOptions, setStoredOptions,
-} from '../../storage';
-import useEffectAsync from '../hooks/useEffectAsync';
-import changeSpeed from '../../changeSpeed';
+import { useDispatch, useSelector } from 'react-redux';
+import { DEFAULT_SPEED, getTabId } from 'chrome/storage';
+import { AppDispatch, RootState } from 'redux/store';
+import { fetchOptions, setSpeed } from 'redux/options';
+import { Button, IconBtn } from 'components';
+import { useAsync } from 'react-use';
+import Developer from './Developer';
+import { watchScheme } from '../colorScheme';
 
-function OptionsBtn(): React.ReactElement {
-  const [optionsHovering, setOptionsHovering] = useState(false);
+const OptionsBtn: FC = () => {
+  const [hovering, setHovering] = useState(false);
 
   return (
-    <a
-      href={`chrome-extension://${chrome.runtime.id}/options.html`}
-      target="_blank"
-      className="aspect-square h-4 absolute bottom-2 right-2"
-      rel="noreferrer"
-      onMouseEnter={() => setOptionsHovering(true)}
-      onMouseLeave={() => setOptionsHovering(false)}
-      title="Options"
+    <button
+      className="h-[1.125rem] w-[1.125rem] self-end"
+      onMouseEnter={() => setHovering(true)}
+      onMouseLeave={() => setHovering(false)}
+      onClick={() => chrome.runtime.openOptionsPage()}
+      title="Go to Options Page"
+      type="button"
     >
-      {optionsHovering
+      {hovering
         ? <CogIconSolid className="fill-zinc-700 dark:fill-zinc-500" />
         : <CogIconOutline className="stroke-zinc-700 dark:stroke-zinc-500" />}
-    </a>
+    </button>
   );
-}
+};
 
-function PopupPage(): React.ReactElement {
-  const [options, setOptions] = useState<IStoredOptions>();
-  const [speed, setSpeed] = useState<number>();
-  const [tabId, setTabId] = useState<number>();
+const PopupPage: FC = () => {
+  const options = useSelector((state: RootState) => state.options);
+  const dispatch = useDispatch<AppDispatch>();
 
-  useEffect(getScheme, []);
-
-  useEffectAsync(async () => {
-    const { tabId: id, speed: s } = await getSpeed();
-    setSpeed(s);
-    setTabId(id);
-    setOptions(await getStoredOptions());
-  }, []);
+  const tabId = useRef<number>();
+  const speed = (): number => options?.speed[tabId.current ?? -1] ?? DEFAULT_SPEED;
 
   useEffect(() => {
-    if (!tabId || !speed) return;
-    changeSpeed(tabId, speed);
-  }, [speed]);
+    watchScheme();
+    void dispatch(fetchOptions());
+  }, [dispatch]);
+  useAsync(async () => {
+    tabId.current = await getTabId();
+  }, []);
 
+  if (!options || !tabId.current) return null;
   return (
-    <div className="flex flex-col gap-2 items-center p-6 bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300 font-sans">
-      <input
-        type="range"
-        id="speed"
-        min={options?.min || DEFAULT_OPTIONS.min}
-        max={options?.max || DEFAULT_OPTIONS.max}
-        step="0.1"
-        value={speed ?? DEFAULT_SPEED}
-        onChange={ev => setSpeed(ev.target.valueAsNumber)}
-        className="w-36 h-2 rounded-full shadow bg-white appearance-none dark:bg-zinc-700"
-      />
-      <label htmlFor="speed" className="text-base mt-1">
-        {speed}
-        x
-      </label>
-      <Button onClick={() => setSpeed(DEFAULT_SPEED)}>Reset</Button>
-      <OptionsBtn />
+    <div className="flex p-1">
+      <Developer tabId={tabId.current} />
+
+      <div className="mt-4 flex flex-col gap-2 items-center justify-items-center">
+        <input
+          type="range"
+          id="speed"
+          min={options.min}
+          max={options.max}
+          step="0.1"
+          value={speed()}
+          onChange={ev => {
+            dispatch(setSpeed({ speed: ev.target.valueAsNumber, tabId: tabId.current }));
+          }}
+          className="mx-5 w-36 h-2 rounded-full shadow bg-white appearance-none dark:bg-zinc-700"
+        />
+
+        <div className="flex items-center">
+          <IconBtn
+            onClick={() => dispatch(setSpeed({ speed: speed() - 0.1, tabId: tabId.current }))}
+            disabled={speed() <= options.min}
+          >
+            <MinusIcon />
+          </IconBtn>
+          <label htmlFor="speed" className="w-14 mt-1 text-sm text-center font-medium">
+            {speed()}x
+          </label>
+          <IconBtn
+            onClick={() => dispatch(setSpeed({ speed: speed() + 0.1, tabId: tabId.current }))}
+            disabled={speed() >= options.max}
+          >
+            <PlusIcon />
+          </IconBtn>
+        </div>
+
+        <Button onClick={() => dispatch(setSpeed({ speed: DEFAULT_SPEED, tabId: tabId.current }))}>
+          Reset
+        </Button>
+        <OptionsBtn />
+      </div>
     </div>
   );
-}
+};
 
 export default PopupPage;

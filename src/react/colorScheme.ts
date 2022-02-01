@@ -1,4 +1,4 @@
-import { ColorScheme, getStoredOptions } from '../storage';
+import { ColorScheme, getStoredOptions } from 'chrome/storage';
 
 export const schemes: ColorScheme[] = ['auto', 'light', 'dark'];
 
@@ -14,14 +14,11 @@ export function updateScheme(scheme: ColorScheme) {
 export function watchScheme() {
   window
     .matchMedia('(prefers-color-scheme: dark)')
-    .addEventListener('change', async e => {
-      if ((await getStoredOptions()).colorScheme === 'auto') {
-        updateScheme(e.matches ? 'dark' : 'light');
-      }
+    .addEventListener('change', e => {
+      void getStoredOptions().then(({ colorScheme }) => {
+        if (colorScheme === 'auto') {
+          updateScheme(e.matches ? 'dark' : 'light');
+        }
+      });
     });
-}
-
-export function getScheme() {
-  getStoredOptions().then(({ colorScheme }) => updateScheme(colorScheme));
-  watchScheme();
 }
