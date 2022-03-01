@@ -3,7 +3,6 @@ import { Tab } from '@headlessui/react';
 import { useSelector, useDispatch } from 'react-redux';
 import { toTitleCase } from 'utils';
 import { Button, Card, NumberInput } from 'components';
-import { IStoredOptions } from 'chrome/storage';
 import { AppDispatch, RootState } from 'redux/store';
 import {
   resetOptions, setColorScheme, setMax, setMin, setOptions, saveOptions,
@@ -21,7 +20,7 @@ const colorSelectorWidth = 4 * schemes.length; // rem
 const MainOptions: FC = () => {
   const {
     max, min, colorScheme,
-  } = useSelector((opts: RootState) => opts.options) as IStoredOptions;
+  } = useSelector((opts: RootState) => opts.options);
   const dispatch = useDispatch<AppDispatch>();
 
   const handleColorSchemeChange = (scheme: number) => {
@@ -90,7 +89,8 @@ const MainOptions: FC = () => {
               </Tab.Group>
               <div
                 className="absolute top-0 left-0 m-1 h-[calc(100%-0.5rem)] -z-10
-                           rounded-full bg-yellow-400/50 dark:bg-yellow-500/50 transition-transform duration-150"
+                           rounded-full bg-yellow-400/50 dark:bg-yellow-500/50
+                           transition-transform duration-150"
                 style={{
                   transform: `translateX(${schemes.indexOf(colorScheme) * (colorSelectorWidth / schemes.length)}rem)`,
                   width: `${colorSelectorWidth / schemes.length - 0.5}rem`,

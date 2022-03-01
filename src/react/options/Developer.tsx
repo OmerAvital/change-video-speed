@@ -11,11 +11,9 @@ import { setDeveloperMode } from 'redux/options';
 import { useAsync } from 'react-use';
 
 const Developer: FC = () => {
-  const options = useSelector((opts: RootState) => opts.options) as IStoredOptions;
+  const options = useSelector((opts: RootState) => opts.options);
   const dispatch = useDispatch<AppDispatch>();
-
   const [savedOptions, setSavedOptions] = useState<IStoredOptions>();
-
   const [showSwitch, setShowSwitch] = useState(true);
   const timeoutId = useRef<number>();
   const isFirstRender = useRef(true);
@@ -81,7 +79,7 @@ const Developer: FC = () => {
             <Switch.Group
               as={Card}
               className="absolute top-4 right-4 flex items-center gap-3 w-fit py-2 px-3
-                       rounded shadow-none border dark:border-zinc-700"
+                         rounded shadow-none border dark:border-zinc-700"
             >
               <Switch.Label className="whitespace-nowrap">Developer Mode</Switch.Label>
               <CustomSwitch

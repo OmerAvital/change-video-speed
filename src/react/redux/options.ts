@@ -25,7 +25,7 @@ export const fetchOptions = createAsyncThunk(
 
 export const optionsSlice = createSlice({
   name: 'options',
-  initialState: null as IStoredOptions | null,
+  initialState: defaultOptions,
   reducers: {
     setColorScheme(state, action: PayloadAction<ColorScheme>) {
       if (!state) return;

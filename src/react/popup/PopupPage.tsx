@@ -35,18 +35,17 @@ const PopupPage: FC = () => {
   const options = useSelector((state: RootState) => state.options);
   const dispatch = useDispatch<AppDispatch>();
 
-  const tabId = useRef<number>();
-  const speed = (): number => options?.speed[tabId.current ?? -1] ?? DEFAULT_SPEED;
+  const tabId = useRef(-1);
+  const speed = (): number => options.speed[tabId.current] ?? DEFAULT_SPEED;
 
   useEffect(() => {
     watchScheme();
     void dispatch(fetchOptions());
   }, [dispatch]);
   useAsync(async () => {
-    tabId.current = await getTabId();
+    tabId.current = await getTabId() ?? -1;
   }, []);
 
-  if (!options || !tabId.current) return null;
   return (
     <div className="flex p-1">
       <Developer tabId={tabId.current} />
