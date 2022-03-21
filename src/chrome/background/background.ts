@@ -1,4 +1,4 @@
-import { getStoredOptions, removeSpeed } from 'chrome/storage';
+import { getStoredOptions, removeSpeed, saveOptionsToStorage } from 'chrome/storage';
 import changeSpeed from 'chrome/changeSpeed';
 
 chrome.tabs.onRemoved.addListener(tabId => {
@@ -12,4 +12,9 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
     if (speed === undefined) return;
     void changeSpeed(tabId, speed);
   });
+});
+
+chrome.runtime.onStartup.addListener(() => {
+  // clean up old tabs that have been removed
+  void saveOptionsToStorage({ speed: {} });
 });

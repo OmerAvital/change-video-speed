@@ -31,16 +31,9 @@ export async function saveOptionsToStorage(data: Partial<IStoredOptions>): Promi
   await chrome.storage.local.set(data);
 }
 
-export async function getTabId(): Promise<number> {
-  return new Promise((resolve, reject) => {
-    chrome.tabs.query({ active: true, currentWindow: true }, ([{ id }]) => {
-      if (!id) {
-        reject(new Error('No active tab'));
-        return;
-      }
-      resolve(id);
-    });
-  });
+export async function getTabId(): Promise<number | undefined> {
+  const [{ id }] = await chrome.tabs.query({ active: true, currentWindow: true });
+  return id;
 }
 
 export async function removeSpeed(tabId: number): Promise<void> {
